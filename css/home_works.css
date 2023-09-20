@@ -39,13 +39,13 @@
   border: 1px solid var(--orange);
   position: relative;
   margin: 0 auto;
-  border-radius: 20px;
+  border-radius: 45px;
   padding: 50px;
 }
 
 .inner_parent_block {
-  height: 400px;
-  width: 400px;
+  height: 500px;
+  width: 500px;
   border: 1px solid var(--orange);
   border-radius: 18px;
 }
@@ -199,4 +199,11 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+#secondsS {
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  align-items: center;
 }
