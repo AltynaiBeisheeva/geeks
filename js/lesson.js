@@ -16,35 +16,37 @@ phoneButton.onclick = () => {
 };
 
 // TAB SLIDER
-// const tabContentBlocks = document.querySelectorAll(".tab_content_block");
-// const tabsBlock = document.querySelectorAll(".tab_content_item");
-// const parentTabs = document.querySelector(".tab_content_items");
+const tabContentBlocks = document.querySelectorAll(".tab_content_block");
+const tabsBlock = document.querySelectorAll(".tab_content_item");
+const parentTabs = document.querySelector(".tab_contents_block"); // Изменен селектор
 
-// const hideTabContent = () => {
-//   tabContentBlocks.forEach((tabContentBlock) => {
-//     tabContentBlock.style.display = "none";
-//   });
-//   tabItems.forEach((tabItem) => {
-//     tabItem.classList.remove(".tab_content_item_active");
-//   });
-// };
-// const showTabContent = (indexElement = 3) => {
-//   tabContentBlocks[indexElement].style.display = "block";
-//   tabItems[indexElement].classList.add(".tab_content_item_active");
-// };
-// hideTabContent();
-// showTabContent();
+const hideTabContent = () => {
+  tabContentBlocks.forEach((tabContentBlock) => {
+    tabContentBlock.style.display = "none";
+  });
+  tabsBlock.forEach((tabItem) => {
+    tabItem.classList.remove("tab_content_item_active");
+  });
+};
 
-// parentTabs.onclick = (event) => {
-//   if (event.target.classList.contains(".tab_content_items")) {
-//     tabItems.forEach((tabItem, tabIndex) => {
-//       if (event.target == tabItem) {
-//         hideTabContent();
-//         showTabContent(tabIndex);
-//       }
-//     });
-//   }
-// };
+const showTabContent = (indexElement) => {
+  tabContentBlocks[indexElement].style.display = "block";
+  tabsBlock[indexElement].classList.add("tab_content_item_active");
+};
+
+hideTabContent();
+showTabContent(0);
+
+parentTabs.onclick = (event) => {
+  if (event.target.classList.contains("tab_content_item")) {
+    tabsBlock.forEach((tabItem, tabIndex) => {
+      if (event.target == tabItem) {
+        hideTabContent();
+        showTabContent(tabIndex);
+      }
+    });
+  }
+};
 
 // Convert
 
@@ -90,30 +92,30 @@ const card = document.querySelector(".card");
 const btnPrev = document.querySelector("#btn-prev");
 const btnNext = document.querySelector("#btn-next");
 let count = 1;
-fetch(`https://jsonplaceholder.typicode.com/todos/${count}`)
-  .then((response) => response.json())
-  .then((data) => {
+
+const todos = async () => {
+  try {
+    const response = await fetch(
+      `https://jsonplaceholder.typicode.com/todos/${count}`
+    );
+    const data = await response.json();
+
     card.innerHTML = `<p>${data.title}</p>
-      <p style="color": ${data.completed ? "green" : "red"}>${
-      data.completed
-    }</p>
-      <span>${data.id}</span>`;
-  });
+        <p>${data.completed}</p>
+        <span>${data.id}</span>`;
+  } catch (error) {
+    console.error("Произошла ошибка:", error.message);
+  }
+};
+
+todos();
 
 btnNext.onclick = () => {
   count++;
   if (count > 200) {
     count -= 200;
   }
-  fetch(`https://jsonplaceholder.typicode.com/todos/${count}`)
-    .then((response) => response.json())
-    .then((data) => {
-      card.innerHTML = `<p>${data.title}</p>
-      <p style="color": ${data.completed ? "green" : "red"}>${
-        data.completed
-      }</p>
-      <span>${data.id}</span>`;
-    });
+  todos();
 };
 
 btnPrev.onclick = () => {
@@ -121,19 +123,26 @@ btnPrev.onclick = () => {
   if (count < 1) {
     count += 200;
   }
-  fetch(`https://jsonplaceholder.typicode.com/todos/${count}`)
-    .then((response) => response.json())
-    .then((data) => {
-      card.innerHTML = `<p>${data.title}</p>
-      <p style="color": ${data.completed ? "green" : "red"}>${
-        data.completed
-      }</p>
-      <span>${data.id}</span>`;
-    });
+  todos();
 };
+// Weather
+const city = document.querySelector(".city");
+const temp = document.querySelector(".temp");
+const cityName = document.querySelector(".cityName");
 
-fetch(`https://jsonplaceholder.typicode.com/todos/`)
-  .then((response) => response.json())
-  .then((data) => {
-    console.log(data);
-  });
+const DEFAULT_API = "http://api.openweathermap.org/data/2.5/weather";
+const API_KEY = "e417df62e04d3b1b111abeab19cea714";
+
+cityName.oninput = async (event) => {
+  try {
+    const response = await fetch(
+      `${DEFAULT_API}?q=${event.target.value}&appid=${API_KEY}`
+    );
+    const data = await response.json();
+    city.innerHTML = data.name;
+    const celsiusTemp = Math.round(data.main.temp - 273.15);
+    temp.innerHTML = celsiusTemp + "&deg;C";
+  } catch (error) {
+    city.innerHTML = "Такого города нет";
+  }
+};
