@@ -1,23 +1,80 @@
-main {
-  padding: 20px;
-}
-
 .card {
-  border: 1px solid #ccc;
-  margin: 10px;
-  padding: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding-top: 50px;
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  background: #07182e;
+  z-index: 1;
 }
 
-.card img {
-  max-width: 100%;
+.post-card {
+  width: 300px;
+  padding: 15px;
+  border: 1px solid;
+  height: 400px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 10px;
+  border-radius: 20px;
+  position: relative;
+  place-content: center;
+  place-items: center;
+  overflow: hidden;
+  z-index: 2;
 }
 
-.card h2 {
-  font-size: 20px;
-  margin: 10px 0;
+p {
+  color: white;
 }
 
-.card p {
-  font-size: 16px;
+h3 {
+  font-size: 15px;
+  color: rgb(18, 232, 225);
+  z-index: 1;
+}
+
+img {
+  width: 250px;
+  height: 170px;
+}
+
+.post-card::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+    180deg,
+    rgb(0, 183, 255),
+    rgb(255, 48, 255)
+  );
+  top: 0;
+  left: 0;
+  transform-origin: center;
+  transform: scale(0) rotate(0deg);
+  /* Изменено свойство transform */
+  animation: rotBGimg 3s linear infinite;
+  transition: all 0.2s linear;
+  z-index: -1;
+  /* Изменено значение z-index */
+}
+
+@keyframes rotBGimg {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.post-card::after {
+  /* content: ""; */
+  position: absolute;
+  background: #07182e;
+  inset: 5px;
+  border-radius: 15px;
 }

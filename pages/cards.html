@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <title>Lessons</title>
-    <link rel="stylesheet" href="../css/style.css" />
-    <link rel="stylesheet" href="../css/core.css" />
-    <link rel="stylesheet" href="../css/lessons.css" />
-    <script defer src="script.js"></script>
+<meta charset="UTF-8" />
+<title>Cards</title>
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="../css/core.css" />
+<link rel="stylesheet" href="../css/card.css" />
 </head>
 
 <body>
-
     <div class="wrapper">
         <div class="header">
             <div class="container">
@@ -29,7 +25,7 @@
                             <a href="../pages/lessons.html">Lessons</a>
                         </li>
                         <li class="menu_link">
-                            <a href="../pages/cards.html" target="_blank">Cards</a>
+                            <a href="../pages/cards.html">Cards</a>
                         </li>
                     </ul>
                     <button class="btn" id="btn-get">Click me!</button>
@@ -37,24 +33,33 @@
             </div>
         </div>
 
-        </footer>
+        <div class="card">
 
+        </div>
 
-        <div class="modal">
-            <div class="modal_dialog">
-                <div class="modal_content">
-                    <form action="#">
-                        <div class="modal_close">&times;</div>
-                        <div class="modal_title">Мы свяжемся с вами как можно быстрее!</div>
-                        <input required placeholder="Ваше имя" name="name" type="text" class="modal_input" />
-                        <input required placeholder="Ваш номер телефона" name="phone" type="phone" class="modal_input" />
-                        <button class="btn btn_dark btn_min">Перезвонить мне</button>
-                    </form>
-                </div>
+        <div class="footer">
+            <div class="container">
+                <div class="inner_footer"></div>
+                <h2>ALTYNAI</h2>
             </div>
         </div>
+    </div>
+
+    <div class="modal">
+        <div class="modal_dialog">
+            <div class="modal_content">
+                <form action="#">
+                    <div class="modal_close">&times;</div>
+                    <div class="modal_title">Мы свяжемся с вами как можно быстрее!</div>
+                    <input required placeholder="Ваше имя" name="name" type="text" class="modal_input" />
+                    <input required placeholder="Ваш номер телефона" name="phone" type="phone" class="modal_input" />
+                    <button class="btn btn_dark btn_min">Перезвонить мне</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
-<script src="../js/lesson.js"></script>
+<script src="../js/cards.js"></script>
 <script src="../js/modal.js"></script>
 
 </html>

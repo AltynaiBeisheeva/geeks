@@ -16,37 +16,45 @@ phoneButton.onclick = () => {
 };
 
 // TAB SLIDER
-const tabContentBlocks = document.querySelectorAll(".tab_content_block");
-const tabsBlock = document.querySelectorAll(".tab_content_item");
-const parentTabs = document.querySelector(".tab_contents_block"); // Изменен селектор
+const tabContentBLocks = document.querySelectorAll(".tab_content_block");
+const tabsItems = document.querySelectorAll(".tab_content_item");
+const parentTabs = document.querySelector(".tab_content_items");
 
 const hideTabContent = () => {
-  tabContentBlocks.forEach((tabContentBlock) => {
+  tabContentBLocks.forEach((tabContentBlock) => {
     tabContentBlock.style.display = "none";
   });
-  tabsBlock.forEach((tabItem) => {
+  tabsItems.forEach((tabItem) => {
     tabItem.classList.remove("tab_content_item_active");
   });
 };
-
-const showTabContent = (indexElement) => {
-  tabContentBlocks[indexElement].style.display = "block";
-  tabsBlock[indexElement].classList.add("tab_content_item_active");
+const showTabContent = (indexElement = 0) => {
+  tabContentBLocks[indexElement].style.display = "block";
+  tabsItems[indexElement].classList.add("tab_content_item_active");
 };
-
-hideTabContent();
-showTabContent(0);
-
 parentTabs.onclick = (event) => {
   if (event.target.classList.contains("tab_content_item")) {
-    tabsBlock.forEach((tabItem, tabIndex) => {
-      if (event.target == tabItem) {
+    tabsItems.forEach((tabItem, tabIndex) => {
+      if (event.target === tabItem) {
         hideTabContent();
         showTabContent(tabIndex);
       }
     });
   }
 };
+const autoTabContentSlide = (i = 0) => {
+  setInterval(() => {
+    i++;
+    if (i > tabContentBLocks.length - 1) {
+      i = 0;
+    }
+    hideTabContent();
+    showTabContent(i);
+  }, 3000);
+};
+autoTabContentSlide();
+hideTabContent();
+showTabContent();
 
 // Convert
 
